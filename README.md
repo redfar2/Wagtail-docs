@@ -1,4 +1,4 @@
-# Pawly theme documentation
+# Wagtail theme documentation
 
 Static site for GitHub Pages: `index.html` is the whole site (no build step).
 
