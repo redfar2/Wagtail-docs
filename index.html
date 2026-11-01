@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pawly Theme Docs</title>
+<meta name="description" content="Documentation for Pawly, a Shopify theme for pet stores: setup, theme settings, sections, product page features, metafields and support.">
+<style>
+  :root {
+    --bg: #fbf7f0; --surface: #ffffff; --text: #23201d; --muted: #6b635a; --line: #e6ddd0;
+    --accent: #b8501f; --accent-soft: #fbe6d8; --sage: #e6eedb; --code: #f3ede4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1b1916; --surface: #24211d; --text: #f1ebe2; --muted: #b3a99c; --line: #3a352f;
+      --accent: #f0915c; --accent-soft: #3d2a1f; --sage: #2c3326; --code: #2e2a25; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 16px; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--accent); }
+  .skip { position: absolute; left: -999px; } .skip:focus { left: 16px; top: 16px; background: var(--surface); padding: 8px 12px; z-index: 9; }
+  .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); max-width: 1180px; margin: 0 auto; }
+  nav { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; padding: 28px 20px; border-right: 1px solid var(--line); }
+  nav .brand { font-weight: 800; font-size: 22px; margin: 0 0 4px; }
+  nav .ver { color: var(--muted); font-size: 13px; margin: 0 0 20px; }
+  nav ol { list-style: none; padding: 0; margin: 0; }
+  nav li a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--text); text-decoration: none; font-size: 15px; }
+  nav li a:hover, nav li a:focus-visible { background: var(--accent-soft); }
+  main { padding: 40px clamp(16px, 4vw, 56px) 80px; min-width: 0; }
+  h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; margin: 0 0 12px; }
+  h2 { font-size: 26px; margin: 56px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 19px; margin: 28px 0 8px; }
+  p, li { max-width: 72ch; }
+  .lead { font-size: 18px; color: var(--muted); }
+  code { background: var(--code); padding: 1px 6px; border-radius: 6px; font-size: 0.92em; }
+  pre { background: var(--code); padding: 14px 16px; border-radius: 12px; overflow-x: auto; font-size: 14px; line-height: 1.5; }
+  pre code { background: none; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--surface); }
+  .table-wrap { overflow-x: auto; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin: 16px 0; }
+  .tip { background: var(--sage); border-radius: 12px; padding: 12px 16px; margin: 16px 0; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; padding: 12px 20px; border-radius: 999px; text-decoration: none; font-weight: 700; }
+  @media (prefers-color-scheme: dark) { .btn { color: #1b1916; } }
+  .menu-toggle { display: none; }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 16px; }
+    nav ol { display: none; } nav.open ol { display: block; }
+    .menu-toggle { display: inline-block; margin-top: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: inherit; color: var(--text); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="layout">
+  <nav id="nav" aria-label="Documentation">
+    <p class="brand">Pawly</p>
+    <p class="ver">Shopify theme · version 1.0.0</p>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="toc">Contents</button>
+    <ol id="toc">
+      <li><a href="#getting-started">Getting started</a></li>
+      <li><a href="#theme-settings">Theme settings</a></li>
+      <li><a href="#home-page">Home page sections</a></li>
+      <li><a href="#product-page">Product page</a></li>
+      <li><a href="#pet-profile">Pet profile ("Best for")</a></li>
+      <li><a href="#size-finder">Size finder</a></li>
+      <li><a href="#metafields">Metafields reference</a></li>
+      <li><a href="#tags">Product tags</a></li>
+      <li><a href="#collections">Collections and search</a></li>
+      <li><a href="#pages">Pages, blog and account</a></li>
+      <li><a href="#apps">Apps and app blocks</a></li>
+      <li><a href="#languages">Languages and markets</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#support">Support</a></li>
+      <li><a href="#changelog">Changelog</a></li>
+    </ol>
+  </nav>
+
+  <main id="content">
+    <h1>Pawly theme documentation</h1>
+    <p class="lead">Pawly is a warm, playful Shopify theme made for pet stores. It includes a shop-by-pet picker, a size finder with breed guidance, a "Best for" pet profile on product pages, and organic pebble and wave shapes.</p>
+
+    <h2 id="getting-started">Getting started</h2>
+    <h3>Install and preview</h3>
+    <ol>
+      <li>Add Pawly from the Shopify Theme Store. It is added to <strong>Online Store → Themes</strong> as an unpublished theme.</li>
+      <li>Click <strong>Customize</strong> to open the theme editor. Your products, collections and menus appear right away.</li>
+      <li>When you're happy with it, click <strong>Publish</strong>.</li>
+    </ol>
+    <h3>Recommended first steps</h3>
+    <ol>
+      <li><strong>Logo and colors:</strong> Theme settings → Logo, then Colors. Pawly has 5 color schemes; every section has its own scheme picker.</li>
+      <li><strong>Menus:</strong> the header uses your <code>main-menu</code> (up to three levels). The footer has menu columns you choose per block.</li>
+      <li><strong>Home page:</strong> pick collections for Shop by pet, the collection list and the featured collection.</li>
+      <li><strong>Product page:</strong> add pet profile tags and size guides to the products that need them (see below).</li>
+      <li><strong>Shipping estimates:</strong> set your processing and delivery times in Theme settings → Shipping estimates.</li>
+    </ol>
+    <div class="tip">Every section is hidden on the storefront when it has nothing to show, for example a size finder on a product without sizes. You can safely leave sections in the product template.</div>
+
+    <h2 id="theme-settings">Theme settings</h2>
+    <p>Open the theme editor and click the gear icon (Theme settings).</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Group</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td>Logo</td><td>Logo image (SVG or 3× PNG recommended), separate desktop and mobile heights, favicon. Without a logo, the store name is shown as text.</td></tr>
+        <tr><td>Colors</td><td>Color schemes: background, surface (cards and fields), text, accent, secondary accent, button background and labels. Tints are generated automatically from your colors.</td></tr>
+        <tr><td>Typography</td><td>Heading and body fonts from the Shopify font library.</td></tr>
+        <tr><td>Images</td><td><em>Soften lifestyle photos</em> applies a light washed look to hero, banner and lifestyle images. Product photos are never changed.</td></tr>
+        <tr><td>Shapes</td><td>Lifestyle image shape (pebble, arch, rounded), panel edges (wavy or rounded) and paw-print list bullets.</td></tr>
+        <tr><td>Product cards</td><td>Color swatches, star rating (from your review app) and a quick add button.</td></tr>
+        <tr><td>Shipping estimates</td><td>Processing days, delivery days after dispatch, and per-country delivery times, one per line: <code>FR: 2-4</code>. Shows an estimated delivery date range on product pages.</td></tr>
+        <tr><td>Cart</td><td>Cart drawer or cart page, order note, accelerated checkout buttons (cart page), and two shortcut links shown in an empty cart.</td></tr>
+        <tr><td>Search</td><td>Search placeholder and popular searches (comma-separated) shown when the search box is empty.</td></tr>
+        <tr><td>Social media</td><td>Links shown in the footer.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="home-page">Home page sections</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Section</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Hero</td><td>Tag, heading with highlighted text, two buttons, separate desktop (1600 × 1400 px) and mobile (900 × 1100 px) images, image focus.</td></tr>
+        <tr><td>Shop by pet</td><td>One tab per pet (up to 4). Each pet has a collection, image, heading, shortcut collections and a button, and shows products from its collection. The shopper's last choice is remembered on their device.</td></tr>
+        <tr><td>Collection list</td><td>Collection tiles with a background tint and optional custom image (1200 × 1000 px).</td></tr>
+        <tr><td>Featured collection</td><td>Up to 12 products from one collection.</td></tr>
+        <tr><td>Collection banners</td><td>Two-up promotional banners linked to collections.</td></tr>
+        <tr><td>Feature icons</td><td>Icon, title and text blocks for your store's promises.</td></tr>
+        <tr><td>Product spotlight</td><td>One product with benefits list and image.</td></tr>
+        <tr><td>Featured product</td><td>A full buy box for one product, with the same blocks as the product page.</td></tr>
+        <tr><td>Image with text overlap</td><td>A wide lifestyle image with an overlapping text card.</td></tr>
+        <tr><td>Testimonials</td><td>Add your review app block, or review blocks copied from genuine customer reviews.</td></tr>
+        <tr><td>Newsletter, Call to action, Image banner, Heading with text, Value cards, Custom Liquid</td><td>General-purpose sections you can add to any page.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="product-page">Product page</h2>
+    <p>The <strong>Product information</strong> section has these blocks, which you can reorder or remove:</p>
+    <ul>
+      <li><strong>Eyebrow</strong> (product type, vendor, collection or custom text), <strong>Title</strong>, <strong>Rating</strong>, <strong>Price</strong> (with unit prices and installments).</li>
+      <li><strong>Short description</strong> from the <code>custom.short_description</code> metafield or the start of the description.</li>
+      <li><strong>Pet profile</strong>, <strong>Inventory status</strong> with a low-stock threshold, <strong>Variant picker</strong> with color swatches.</li>
+      <li><strong>Buy buttons</strong> with quantity, dynamic checkout, gift card recipient form, and store pickup availability.</li>
+      <li><strong>Reassurance</strong> lines (delivery estimate, returns, secure checkout), <strong>Collapsible tabs</strong> and <strong>Custom Liquid</strong>.</li>
+      <li><strong>App blocks</strong> from your installed apps.</li>
+    </ul>
+    <p>Below the buy box, the default product template includes Product benefits, Product versions, How it works, Size finder, Specs and FAQ, Good to know, Product reviews, and complementary and related products. Each is hidden when the product has no data for it.</p>
+    <p>The gallery supports images, videos, YouTube and Vimeo videos, and 3D models, with click-to-zoom.</p>
+
+    <h2 id="pet-profile">Pet profile ("Best for")</h2>
+    <p>The Pet profile block shows up to four rows, such as Pet, Size, Age and Activity. Each row shows, in order of priority:</p>
+    <ol>
+      <li>the row's <strong>Value</strong> setting, which you can connect to a product metafield in the theme editor; or</li>
+      <li>the text after a matching <strong>product tag</strong>. The default prefixes are <code>pet:</code>, <code>size:</code>, <code>age:</code> and <code>energy:</code>.</li>
+    </ol>
+    <pre><code>pet:Dogs
+size:Small to large dogs
+age:Adult dogs
+energy:Evening walkers</code></pre>
+    <p>Rows without a value are hidden, and the whole block is hidden when no row has a value. You can change each row's label, icon and tag prefix.</p>
+
+    <h2 id="size-finder">Size finder</h2>
+    <p>The Size finder shows size cards with ranges, a second unit, typical breeds and details. When sizes have a minimum and maximum, shoppers can type their pet's measurement and the matching size is highlighted.</p>
+    <h3>Option 1: per product, with a metafield (recommended)</h3>
+    <p>Create a product metafield <code>custom.size_guide</code> of type JSON:</p>
+    <pre><code>{
+  "heading": "Find the right fit",
+  "measure": "Fits neck",
+  "unit": "cm",
+  "input_label": "Your dog's neck",
+  "tip": "Measure where the collar sits, then add two fingers of space.",
+  "sizes": [
+    { "size": "S", "range": "30–40 cm", "alt": "12–16 in", "min": 30, "max": 40,
+      "breeds": "Jack Russell, Dachshund", "details": ["Width 2.0 cm"] },
+    { "size": "M", "range": "38–50 cm", "alt": "15–20 in", "min": 38, "max": 50,
+      "breeds": "Beagle, Border Collie" }
+  ]
+}</code></pre>
+    <h3>Option 2: with section blocks</h3>
+    <p>Add Size blocks to the Size finder section. To show them only on some products, enter a tag in <em>Only show on products tagged</em> (for example <code>collar-sizes</code>) and add that tag to those products. For different size charts per product type, use an alternate product template for each.</p>
+
+    <h2 id="metafields">Metafields reference</h2>
+    <p>Create these in <strong>Settings → Custom data → Products</strong>. All are optional.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Metafield</th><th>Type</th><th>Used by</th></tr></thead>
+      <tbody>
+        <tr><td><code>custom.short_description</code></td><td>Multi-line text</td><td>Short description block, product spotlight</td></tr>
+        <tr><td><code>custom.care</code></td><td>Rich text</td><td>Collapsible tab with source "Care"</td></tr>
+        <tr><td><code>custom.shipping_note</code></td><td>Single-line text</td><td>Reassurance block, country notice</td></tr>
+        <tr><td><code>custom.size_guide</code></td><td>JSON</td><td>Size finder (format above)</td></tr>
+        <tr><td><code>custom.benefits</code></td><td>JSON</td><td>Product benefits: <code>[{"title":"…","text":"…","media":2,"icon":"heart"}]</code>. <code>media</code> is the image position in the gallery.</td></tr>
+        <tr><td><code>custom.steps</code></td><td>JSON</td><td>How it works: <code>[{"title":"…","text":"…"}]</code></td></tr>
+        <tr><td><code>custom.versions</code></td><td>JSON</td><td>Product versions: <code>{"heading":"…","items":[{"title":"…","badge":"…","icon":"zap","points":["…"]}]}</code></td></tr>
+        <tr><td><code>custom.good_to_know</code></td><td>JSON</td><td>Good to know: <code>[{"icon":"lock","title":"…","text":"…"}]</code></td></tr>
+        <tr><td><code>custom.faq</code></td><td>JSON</td><td>Specs and FAQ: <code>[{"q":"…","a":"…"}]</code></td></tr>
+        <tr><td><code>specs.dimensions</code>, <code>specs.materials</code>, <code>specs.weight</code>, <code>specs.suitable_for</code>, <code>specs.care</code>, <code>specs.in_box</code></td><td>Single-line text</td><td>Specification rows</td></tr>
+        <tr><td><code>reviews.rating</code>, <code>reviews.rating_count</code></td><td>Written by review apps</td><td>Star ratings on cards and product pages</td></tr>
+      </tbody>
+    </table></div>
+    <p>Icon names you can use in JSON: check, sun, heart, message, truck, shield, returns, leaf, sparkles, gift, package, paw, bone, ruler, zap, battery, moon, eye, droplet, palette, wind, map-pin, clock, lock.</p>
+
+    <h2 id="tags">Product tags</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tag</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>pet:…</code>, <code>size:…</code>, <code>age:…</code>, <code>energy:…</code></td><td>Pet profile rows (prefixes can be changed in the block).</td></tr>
+        <tr><td>Your size finder tag, e.g. <code>collar-sizes</code></td><td>Shows the Size finder's block sizes on that product.</td></tr>
+        <tr><td><code>only:GB</code> (any country code)</td><td>The product can only be bought in the listed countries. Elsewhere the buy button is replaced by a notice. Use several tags for several countries.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="collections">Collections and search</h2>
+    <ul>
+      <li>Collection pages show a banner (collection image, a fallback image, or a decorative banner), filters and sorting. Configure filters in the <strong>Search &amp; Discovery</strong> app.</li>
+      <li>The search overlay shows predictive results as shoppers type, plus your popular searches.</li>
+      <li>Related and complementary products use Shopify product recommendations. Complementary products are chosen in Search &amp; Discovery.</li>
+    </ul>
+
+    <h2 id="pages">Pages, blog and account</h2>
+    <p>Pawly includes page templates for <strong>About</strong> (page heading, image banner, your page content as "Our story", value cards, call to action), <strong>Contact</strong> (form with support email, hours and FAQ link) and <strong>FAQ</strong> (questions grouped into tabs). Assign them under <em>Online Store → Pages → Template</em>.</p>
+    <p>Blog posts support comments, and the customer account links use Shopify's customer accounts.</p>
+
+    <h2 id="apps">Apps and app blocks</h2>
+    <ul>
+      <li>Add app blocks inside the Product information, Featured product, Product reviews and Testimonials sections.</li>
+      <li>Review apps such as Judge.me or Okendo: add their block to Product reviews. Ratings on product cards appear when the app writes the <code>reviews.rating</code> metafield.</li>
+      <li>Subscription apps such as Shopify Subscriptions: add their widget block to Product information.</li>
+    </ul>
+
+    <h2 id="languages">Languages and markets</h2>
+    <ul>
+      <li>Pawly includes English and French for all storefront text and for the theme editor.</li>
+      <li>To sell in more languages, add them in <strong>Settings → Languages</strong>, then translate your own content (products, collections, section text) with the free <strong>Translate &amp; Adapt</strong> app.</li>
+      <li>Turn on the country/region and language selectors in the Header and Footer sections. Add countries in <strong>Settings → Markets</strong>.</li>
+    </ul>
+
+    <h2 id="faq">FAQ</h2>
+    <h3>Why don't I see the size finder or pet profile on a product?</h3>
+    <p>They only appear when the product has data: a <code>custom.size_guide</code> metafield or the size finder tag, and pet profile tags or values.</p>
+    <h3>Some text is still in English after I added a language.</h3>
+    <p>Text you typed into sections, and your products and collections, are your own content. Translate them in Translate &amp; Adapt under <em>Online Store theme</em>.</p>
+    <h3>How do I change the paw icon in the announcement bar?</h3>
+    <p>Turn off <em>Show paw icon</em> in the Announcement bar section.</p>
+    <h3>Can I use my own fonts?</h3>
+    <p>Pick any font from the Shopify font library in Theme settings → Typography.</p>
+
+    <h2 id="support">Support</h2>
+    <div class="card">
+      <p>Need help with Pawly? Send us a request through the support form. Please include your store URL and a short description or screenshot of the issue.</p>
+      <p><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeRMQtxmIin5RWd0R0v9XDUwHEymL8YylSuHUUjV09VGCVlng/viewform">Open the support form</a></p>
+      <p>We answer within 2 business days and fix confirmed theme bugs in updates. Support covers theme features and settings; custom code changes are not included.</p>
+    </div>
+
+    <h2 id="changelog">Changelog</h2>
+    <h3>1.0.0</h3>
+    <p>First release.</p>
+  </main>
+</div>
+<script>
+  const nav = document.getElementById('nav'), t = nav.querySelector('.menu-toggle');
+  t.addEventListener('click', () => { const open = nav.classList.toggle('open'); t.setAttribute('aria-expanded', open); });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); }));
+</script>
+</body>
+</html>
